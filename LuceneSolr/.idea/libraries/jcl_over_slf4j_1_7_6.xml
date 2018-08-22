@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="jcl-over-slf4j-1.7.6">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Solr/lib/jcl-over-slf4j-1.7.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Solr/lib/jul-to-slf4j-1.7.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Solr/lib/log4j-1.2.17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Solr/lib/slf4j-log4j12-1.7.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

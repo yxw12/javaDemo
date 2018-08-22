@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <servlet>
+        <servlet-name>QuseryServlet</servlet-name>
+        <servlet-class>com.ht.ces.controller.QuseryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QuseryServlet</servlet-name>
+        <url-pattern>/QuseryServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddServlet</servlet-name>
+        <servlet-class>com.ht.ces.controller.AddServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddServlet</servlet-name>
+        <url-pattern>/AddServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>QuerySingleUser</servlet-name>
+        <servlet-class>com.ht.ces.controller.QuerySingleUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QuerySingleUser</servlet-name>
+        <url-pattern>/QuerySingleUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+    <servlet-name>UpdateServlet</servlet-name>
+    <servlet-class>com.ht.ces.controller.UpdateServlet</servlet-class>
+</servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateServlet</servlet-name>
+        <url-pattern>/UpdateServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteServlet</servlet-name>
+        <servlet-class>com.ht.ces.controller.DeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteServlet</servlet-name>
+        <url-pattern>/DeleteServlet</url-pattern>
+    </servlet-mapping>
+    <filter>
+        <filter-name>encoderFilter</filter-name>
+        <filter-class>com.ht.ces.filter.encoderFilter</filter-class>
+        <init-param>
+            <param-name>encoder</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encoderFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.ht.ces.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/ces/*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.ht.ces.controller.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>LogooutServlet</servlet-name>
+        <servlet-class>com.ht.ces.controller.LogooutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogooutServlet</servlet-name>
+        <url-pattern>/LogooutServlet</url-pattern>
+    </servlet-mapping>
+
+    <listener>
+        <listener-class>com.ht.ces.Listener.MySessionListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>com.ht.ces.Listener.MyServletContextListener1</listener-class>
+    </listener>
+</web-app>

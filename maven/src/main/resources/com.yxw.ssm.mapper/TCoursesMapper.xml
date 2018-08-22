@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yxw.ssm.dao.TCoursesMapper" >
+  <resultMap id="BaseResultMap" type="com.yxw.ssm.entity.TCourses" >
+    <id column="cou_id" property="couId" jdbcType="VARCHAR" />
+    <result column="cou_name" property="couName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cou_id, cou_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_courses
+    where cou_id = #{couId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_courses
+    where cou_id = #{couId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yxw.ssm.entity.TCourses" >
+    insert into t_courses (cou_id, cou_name)
+    values (#{couId,jdbcType=VARCHAR}, #{couName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yxw.ssm.entity.TCourses" >
+    insert into t_courses
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="couId != null" >
+        cou_id,
+      </if>
+      <if test="couName != null" >
+        cou_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="couId != null" >
+        #{couId,jdbcType=VARCHAR},
+      </if>
+      <if test="couName != null" >
+        #{couName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yxw.ssm.entity.TCourses" >
+    update t_courses
+    <set >
+      <if test="couName != null" >
+        cou_name = #{couName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cou_id = #{couId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yxw.ssm.entity.TCourses" >
+    update t_courses
+    set cou_name = #{couName,jdbcType=VARCHAR}
+    where cou_id = #{couId,jdbcType=VARCHAR}
+  </update>
+</mapper>

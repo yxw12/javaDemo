@@ -1,0 +1,9 @@
+com\yxw\ssm\dao\TStuMapper.class
+com\yxw\ssm\dao\TScoreMapper.class
+com\yxw\ssm\entity\TStu.class
+com\yxw\ssm\dao\TCoursesMapper.class
+com\yxw\ssm\service\impl\StuServiceImpl.class
+com\yxw\ssm\controller\StuController.class
+com\yxw\ssm\entity\TCourses.class
+com\yxw\ssm\entity\TScore.class
+com\yxw\ssm\service\StuService.class

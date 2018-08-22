@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--  开启注解扫描 -->
+    <context:component-scan base-package="com.yxw"/>
+    <!-- 开启aop 驱动加载-->
+    <aop:aspectj-autoproxy/>
+    <bean id="baseDao" class="com.yxw.dao.impl.BaseDao">
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+        <property name="user" value="yan"/>
+        <property name="password" value="123"/>
+        <!--<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/logindb?characterEncoding=utf-8"/>
+        <property name="user" value="root"/>
+        <property name="password" value="123"/>-->
+    </bean>
+
+
+</beans>

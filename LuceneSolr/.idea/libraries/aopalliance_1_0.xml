@@ -1,0 +1,45 @@
+<component name="libraryTable">
+  <library name="aopalliance-1.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/aopalliance-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/aspectjrt-1.5.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/aspectjweaver-1.8.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/commons-io-2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/httpclient-4.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/httpcore-4.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/httpmime-4.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/jcl-over-slf4j-1.7.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/jul-to-slf4j-1.7.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/log4j-1.2.17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/noggit-0.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/slf4j-api-1.7.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/slf4j-log4j12-1.7.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/solr-solrj-4.10.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-aop-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-aspects-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-beans-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-context-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-context-indexer-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-context-support-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-core-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-expression-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-instrument-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-jcl-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-jdbc-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-jms-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-messaging-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-orm-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-oxm-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-test-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-tx-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-web-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-webflux-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-webmvc-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/spring-websocket-5.0.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/wstx-asl-3.2.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDdemo/web/WEB-INF/lib/zookeeper-3.4.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

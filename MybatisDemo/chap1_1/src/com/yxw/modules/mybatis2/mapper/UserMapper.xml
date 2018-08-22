@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace：命名空间，用于隔离sql，还有一个很重要的作用，
+     Mapper动态代理开发的时候使用，需要指定Mapper的类路径
+-->
+<mapper namespace="com.yxw.modules.mybatis2.mapper.UserDaoMapper">
+
+    <!--用包装类型查询用户-->
+    <select id="findByName" parameterType="queryVo" resultType="user">
+        select *
+        from user
+        where username like '%${user.username}%'
+    </select>
+
+    <!--  输出用户表条数
+          返回数据简单类型
+    -->
+    <select id="findCount" resultType="int">
+        select count(1)
+        from user
+    </select>
+
+    <!--查询订单表的所有数据-->
+    <!-- resultMap最终还是要将结果映射到pojo上，type就是指定映射到哪一个pojo -->
+    <!-- id：设置ResultMap的id -->
+    <resultMap id="list" type="order">
+        <!-- 定义主键 ,非常重要。如果是多个字段,则定义多个id -->
+        <!-- property：主键在pojo中的属性名 -->
+        <!-- column：主键在数据库中的列名 -->
+        <id property="id" column="id"/>
+        <!-- 定义普通属性 -->
+        <result property="userId" column="user_id"/>
+        <result property="number" column="number"/>
+        <result property="createtime" column="createtime"/>
+        <!-- association ：配置一对一属性 -->
+        <!-- property:order里面的User属性名 -->
+        <!-- javaType:属性类型 -->
+        <association property="user" javaType="user">
+            <!-- id:声明主键，表示user_id是关联查询对象的唯一标识-->
+            <id property="id" column="user_id"/>
+            <result property="username" column="username"/>
+            <result property="address" column="address"/>
+        </association>
+    </resultMap>
+    <!-- 一对一关联，查询订单，订单内部包含用户属性 -->
+    <select id="findAllOrders" parameterType="order" resultMap="list">
+        SELECT
+             o.id,
+             o.user_id,
+             o.number,
+             o.createtime,
+             u.username,
+             u.address
+        FROM orders o left join user u on o.user_id=u.id
+    </select>
+
+    <!-- 声明sql片段 -->
+    <sql id="userFields">
+        id, username, birthday, sex, address
+    </sql>
+
+    <!-- 根据性别和名字查询用户 -->
+    <select id="findUserByIdName" parameterType="user" resultType="user">
+        <!-- SELECT id, username, birthday, sex, address FROM `user` -->
+        <!-- 使用include标签加载sql片段；refid是sql片段id -->
+        SELECT <include refid="userFields"/>
+        FROM user
+        <!-- where标签可以自动添加where，同时处理sql语句中第一个and关键字 前and-->
+        <where>
+            <if test="sex!=null and sex!=''">
+               AND sex=#{sex}
+            </if>
+            <if test="address!=null and address!=''">
+                AND address like '%${address}%'
+            </if>
+            <if test="username!=null and username!=''">
+                AND username like concat('%',#{username},'%');
+            </if>
+        </where>
+    </select>
+
+    <!-- 根据ids查询用户 -->
+    <select id="findIds" parameterType="queryVo" resultType="user">
+        SELECT <include refid="userFields"/>
+        FROM user
+        <where>
+            id IN
+            <!-- foreach标签，进行遍历 -->
+            <!-- collection：遍历的集合，这里是QueryVo的ids属性 -->
+            <!-- item：遍历的项目，可以随便写，，但是和后面的#{}里面要一致 -->
+            <!-- open：在前面添加的sql片段 -->
+            <!-- close：在结尾处添加的sql片段 -->
+            <!-- separator：指定遍历的元素之间使用的分隔符 -->
+            <foreach collection="ids" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+
+
+
+
+
+</mapper>

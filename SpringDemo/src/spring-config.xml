@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <!--  将User对象交给spring容器管理 -->
+       <!--  Bean元素：使用该元素描述需要spring容器管理的对象
+               name属性：给被管理的对象起个名字，获得对象时根据该名称获得对象
+                        可以重复，可以使用字符
+               class属性：被管理对象的完整类名，利用反射实例化对象
+               id属性：与name属性一模一样，名称不可重复，不能使用特殊字符
+               结论：尽量使用name属性
+
+               scope属性：
+                         singleton（默认值）单例对象，被标识为单例对象在spring中只存在一个实例
+                         prototype:多例原型，被标识为多例对象，每次再获得才会创建，每次创建都是新的对象
+                         request:web环境下，对象与request生命周期一致
+                         session：web环境下，对象与session生命周期一致
+               生命周期属性：
+                         init-method:配置一个方法作为生命周期初始化方法，spring会在对象创建之后立即调用
+                         destory-method:配置一个方法作为生命周期销毁方法，spring容器在关闭并销毁所有容器中的对象之前调用
+        -->
+       <!--  创建方式1：空参构造创建 -->
+       <bean name="user" class="com.yxw.modal.User" scope="singleton" init-method="init" destroy-method="destory">
+
+       </bean>
+       <!--  创建方式2：静态工厂创建
+             调用UserFactory的createUser()方法创建user2对象
+       -->
+       <bean name="user2" class="com.yxw.test.UserFactory" factory-method="createUser">
+
+       </bean>
+
+       <!--  创建方式3：实例工厂创建
+             调用UserFactory对象的createUser1()方法创建user3对象
+       -->
+       <bean name="user3" factory-bean="userFactory" factory-method="createUser1">
+
+       </bean>
+       <bean name="userFactory" class="com.yxw.test.UserFactory" >
+
+       </bean>
+
+       <!--  导入spring其他配置文件-->
+       <import resource="spring-config.xml"></import>
+
+
+
+</beans>

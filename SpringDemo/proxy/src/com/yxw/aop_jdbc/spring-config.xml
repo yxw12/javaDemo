@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context.xsd
+                            ">
+    <context:component-scan base-package="com.yxw.aop_jdbc"></context:component-scan>
+
+    <!-- 加载 Properties 配置文件 -->
+    <context:property-placeholder location="classpath:com/yxw/aop_jdbc/db.properties"></context:property-placeholder>
+
+    <!-- 1.实例化连接池 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${driverClass}"></property>
+        <property name="jdbcUrl" value="${jdbcUrl}"></property>
+        <property name="user" value="${user}"></property>
+        <property name="password" value="${password}"></property>
+        <property name="initialPoolSize" value="${initialPoolSize}"></property>
+        <property name="maxPoolSize" value="${maxPoolSize}"></property>
+        <property name="acquireIncrement" value="${acquireIncrement}"></property>
+    </bean>
+    <!-- 2.创建JdbcTemplate 对象 -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!-- 3.实例化 dao 层对象 -->
+    <!--<bean id="userDao_db" class="com.yxw.aop_jdbc.UserDao_db">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>-->
+
+
+   <!--    <bean id="userDao" class="com.yxw.aop_jdbc.UserDao"></bean>
+
+        <bean id="userDao_2" class="com.yxw.aop_jdbc.UserDao_2">
+            <property name="dataSource" ref="dataSource"></property>
+        </bean>
+-->
+
+
+</beans>
+
+
+
+
+

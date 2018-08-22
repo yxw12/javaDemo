@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       ">
+
+    <context:component-scan base-package="com.yxw"></context:component-scan>
+    <!--     <bean name="User" class="com.yxw.modal.User">
+             <property name="username" value="zhangsan"></property>
+             <property name="password" value="123456"></property>
+             <property name="age" value="22" ></property>
+             <property name="birthday" value="2018/11/11" ></property>
+         </bean>
+         <bean name="User2" class="com.yxw.modal.User">
+             <property name="username" value="lisi"></property>
+             <property name="password" value="123456"></property>
+             <property name="age" value="22" ></property>
+             <property name="birthday" value="2018-11-11" ></property>
+         </bean>
+
+
+          <bean name="UserDao" class="com.yxw.dao.Impl.UserDaoImpl">
+              <property name="userList">
+                  <list>
+                      <ref bean="User"></ref>
+                      <ref bean="User2"></ref>
+                  </list>
+              </property>
+          </bean>
+
+        <bean name="UserService" class="com.yxw.service.Impl.UserServiceImpl">
+             <property name="userDao" ref="UserDao"></property>
+         </bean>
+
+         <bean name="UserServlet" class="com.yxw.controller.UserServlet">
+             <property name="userService" ref="UserService"></property>
+         </bean>
+         <bean name="test" class="com.yxw.test.test">
+             <property name="userServlet" ref="UserServlet"></property>
+         </bean>-->
+
+
+
+
+
+</beans>

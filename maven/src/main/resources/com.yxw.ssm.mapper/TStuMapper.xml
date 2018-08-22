@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yxw.ssm.dao.TStuMapper" >
+  <resultMap id="BaseResultMap" type="com.yxw.ssm.entity.TStu" >
+    <id column="s_no" property="sNo" jdbcType="VARCHAR" />
+    <result column="s_name" property="sName" jdbcType="VARCHAR" />
+    <result column="s_class_id" property="sClassId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    s_no, s_name, s_class_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_stu
+    where s_no = #{sNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_stu
+    where s_no = #{sNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yxw.ssm.entity.TStu" >
+    insert into t_stu (s_no, s_name, s_class_id
+      )
+    values (#{sNo,jdbcType=VARCHAR}, #{sName,jdbcType=VARCHAR}, #{sClassId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yxw.ssm.entity.TStu" >
+    insert into t_stu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sNo != null" >
+        s_no,
+      </if>
+      <if test="sName != null" >
+        s_name,
+      </if>
+      <if test="sClassId != null" >
+        s_class_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sNo != null" >
+        #{sNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sName != null" >
+        #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sClassId != null" >
+        #{sClassId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yxw.ssm.entity.TStu" >
+    update t_stu
+    <set >
+      <if test="sName != null" >
+        s_name = #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sClassId != null" >
+        s_class_id = #{sClassId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where s_no = #{sNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yxw.ssm.entity.TStu" >
+    update t_stu
+    set s_name = #{sName,jdbcType=VARCHAR},
+      s_class_id = #{sClassId,jdbcType=VARCHAR}
+    where s_no = #{sNo,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="getAll" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from t_stu
+  </select>
+
+  <resultMap id="BaseResultMap2" type="com.yxw.ssm.entity.TStu" >
+          <id column="sNo" property="sNo" jdbcType="VARCHAR" />
+          <result column="sName" property="sName" jdbcType="VARCHAR" />
+          <result column="sClassId" property="sClassId" jdbcType="VARCHAR" />
+          <collection property="scores" javaType="list" ofType="tScore">
+              <id property="scoId" column="sco_id"/>
+              <result property="scoNum" column="scoreNum"/>
+              <association property="courses" javaType="tCourses">
+                  <id property="couId" column="cou_id"/>
+                  <result property="couName" column="couName"/>
+              </association>
+          </collection>
+  </resultMap>
+  <select id="getAll2" resultMap="BaseResultMap2">
+    SELECT
+     stu.s_no AS sNo,
+     stu.s_name AS sName,
+     stu.s_class_id AS sClassId,
+     sco.sco_id AS sco_id,
+     sco.sco_num AS scoreNum,
+     cou.cou_id AS cou_id,
+     cou.cou_name AS couName
+    from t_stu stu join t_score sco on stu.s_no=sco.stu_id
+    join t_courses cou on cou.cou_id=sco.cou_id
+  </select>
+</mapper>

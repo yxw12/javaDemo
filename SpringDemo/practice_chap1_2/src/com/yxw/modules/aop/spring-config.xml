@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--  开启注解扫描 -->
+    <context:component-scan base-package="com.yxw.modules.aop"/>
+
+    <!-- 开启 aop 注解-->
+    <aop:aspectj-autoproxy/>
+
+   <!-- <aop:config>
+        <aop:pointcut id="pointcut" expression="execution(* com.yxw.modules.aop.dao.UserDao.*(..))"></aop:pointcut>
+        <aop:aspect id="aspect" ref="aop">
+            <aop:after-returning method="TxAfterReturing" pointcut-ref="pointcut" returning="a"></aop:after-returning>
+        </aop:aspect>
+    </aop:config>-->
+</beans>

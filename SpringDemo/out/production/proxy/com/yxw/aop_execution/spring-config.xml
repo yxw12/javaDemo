@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans.xsd
+
+
+                            http://www.springframework.org/schema/aop
+                            http://www.springframework.org/schema/aop/spring-aop.xsd">
+       <!--dao实例加入容器 -->
+       <bean name="userDao" class="com.yxw.aop_xml.UserDao"></bean>
+       <!--实例化切面类 -->
+       <bean name="aop" class="com.yxw.aop_xml.TransactionAop"></bean>
+       <!--aop 配置 -->
+       <aop:config >
+              <!-- 切入点表达式定义 -->
+
+              <!-- 1. 拦截指定的方法(通用)  -->
+              <!--<aop:pointcut expression="execution(* com.itcast.g_execution.UserDao.save(..))" id="pt"/>-->
+
+              <!-- 2. 拦截指定的类下所有的方法 -->
+              <!--<aop:pointcut expression="execution(* com.itcast.g_execution.UserDao.*(..))" id="pt"/>-->
+
+              <!-- 3. 拦截指定包下所有的类的所有方法 -->
+              <!--<aop:pointcut expression="execution(* com.itcast.g_execution.*.*(..))" id="pt"/>-->
+
+              <!-- 3. 拦截指定包，以及其子包下所有类的所有方法 -->
+              <!--<aop:pointcut expression="execution(* com..*.*(..))" id="pt"/>-->
+
+              <!-- 5. 拦截所有的public方法 -->
+              <!--<aop:pointcut expression="execution(public * *(..))" id="pt"/>-->
+
+              <!-- 6. 拦截所有的包含save方法 -->
+              <!--<aop:pointcut expression="execution(* *save*(..))" id="pt"/>-->
+
+              <!-- 7. 拦截UserDao.save()方法与OrderDao.save() -->
+              <!--<aop:pointcut expression="execution(* com..UserDao.save(..)) || execution(* com..OrderDao.save(..))" id="pt"/>-->
+              <!--<aop:pointcut expression="execution(* com..UserDao.save(..)) or execution(* com..OrderDao.save(..))" id="pt"/>-->
+
+              <!-- 8. 不拦截UserDao.save()方法 -->
+              <!--<aop:pointcut expression="execution(* com..UserDao.save(..))" id="pt"/>-->
+              <!--<aop:pointcut expression=" not execution(* com..UserDao.save(..))" id="pt"/>-->
+
+              <!-- 9. 拦截UserDao.save()同时拦截OrderDao.save() -->
+              <!-- 注意： 这种很少用，一般都是或者的关系即: || 、 or  -->
+              <!--<aop:pointcut expression="execution(* com..UserDao.save(..)) and execution(* com..OrderDao.save(..))" id="pt"/>-->
+              <aop:pointcut expression="execution(* com..UserDao.save(..)) &amp;&amp; execution(* com..OrderDao.save(..))" id="pt"/>
+
+              <aop:aspect ref="aop">
+                     <!--  【前置通知】 -->
+                     <aop:before method="beginTransaction" pointcut-ref="pt"/>
+                     <!--  【后置通知】 -->
+                     <aop:after method="commit" pointcut-ref="pt"/>
+                     <!--  【返回后通知】 -->
+                     <aop:after-returning method="AfterReturning" pointcut-ref="pt"/>
+                     <!--  【异常通知】 -->
+                     <aop:after-throwing method="AfterThrowing" pointcut-ref="pt"/>
+                     <!--  【环绕通知】 -->
+                     <aop:around method="Around" pointcut-ref="pt"/>
+
+              </aop:aspect>
+       </aop:config>
+
+</beans>
+
+
+
+
+

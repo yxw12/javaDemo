@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context.xsd
+                            http://www.springframework.org/schema/aop
+                            http://www.springframework.org/schema/aop/spring-aop.xsd">
+       <!--dao实例加入容器 -->
+       <bean name="userDao" class="com.yxw.aop_xml.UserDao"></bean>
+       <!--实例化切面类 -->
+       <bean name="aop" class="com.yxw.aop_xml.TransactionAop"></bean>
+       <!--aop 配置 -->
+       <aop:config >
+              <!--  切入点表达式定义 -->
+              <aop:pointcut id="pintcut" expression="execution(* com.yxw.aop_xml.UserDao.*(..))"></aop:pointcut>
+              <aop:aspect ref="aop">
+                     <!--  【前置通知】 -->
+                     <aop:before method="beginTransaction" pointcut-ref="pintcut"/>
+                     <!--  【后置通知】 -->
+                     <aop:after method="commit" pointcut-ref="pintcut"/>
+                     <!--  【返回后通知】 -->
+                     <aop:after-returning method="AfterReturning" pointcut-ref="pintcut" />
+                     <!--  【异常通知】 -->
+                     <aop:after-throwing method="AfterThrowing" pointcut-ref="pintcut"/>
+                     <!--  【环绕通知】 -->
+                     <aop:around method="Around" pointcut-ref="pintcut"/>
+
+              </aop:aspect>
+       </aop:config>
+
+</beans>
+
+
+
+
+

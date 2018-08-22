@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace：命名空间，用于隔离sql，还有一个很重要的作用，后面会讲 -->
+<mapper namespace="com.yxw.dao.ProductDao">
+    <resultMap id="product" type="com.yxw.modal.Product">
+        <id property="pid" column="id"/>
+        <result property="pname" column="name"/>
+    </resultMap>
+    <select id="findAll"  resultMap="product">
+        select *
+        from items
+    </select>
+
+    <resultMap id="product1" type="com.yxw.modal.Product">
+        <id property="pid" column="id"/>
+        <result property="pname" column="name"/>
+    </resultMap>
+    <select id="findProById"  parameterType="int" resultMap="product1">
+        select *
+        from items
+        <where>
+            id=#{pid}
+        </where>
+    </select>
+
+    <update id="updateProById" parameterType="com.yxw.modal.Product">
+        UPDATE items
+        SET
+        name=#{pname},
+        price=#{price},
+        detail=#{detail},
+        pic=#{pic},
+        createtime=#{createtime}
+        WHERE id=#{pid}
+    </update>
+
+
+    <resultMap id="product2" type="com.yxw.modal.Product">
+        <id property="pid" column="id"/>
+        <result property="pname" column="name"/>
+    </resultMap>
+    <select id="queryitem"  parameterType="com.yxw.modal.QueryVo" resultMap="product2">
+        select *
+        from items
+        <where>
+            <if test="product.pid!=null and product.pid!=''">
+            AND id=#{product.pid}
+            </if>
+            <if test="product.pname!=null and product.pname!=''">
+            AND name like concat('%',#{product.pname},'%')
+            </if>
+        </where>
+    </select>
+
+    <!--批量删除-->
+    <delete id="deleteitem" parameterType="com.yxw.modal.QueryVo">
+        DELETE FROM items
+        <where>
+            id IN
+            <foreach collection="ids" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </where>
+    </delete>
+
+    <!--批量修改-->
+    <update id="updatePros11" parameterType="com.yxw.modal.QueryVo">
+        <!-- 接收list参数，循环着组装sql语句，注意for循环的写法
+     separator=";" 代表着每次循环完，在sql后面放一个分号
+     item="cus" 循环List的每条的结果集
+     collection="list" list 即为 map传过来的参数key -->
+        <foreach collection="productList"  item="pro" open="begin" separator=";" close="; end;" index="index" >
+            update items
+            set
+                name = #{pro.pname},
+                price = #{pro.price},
+                detail = #{pro.detail},
+                createtime=#{pro.createtime}
+            where id = #{pro.pid}
+        </foreach>
+    </update>
+    <!--批量修改-->
+    <update id="updatePros" parameterType="com.yxw.modal.QueryVo">
+        update items
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="status =case" suffix="end,">
+                <foreach collection="productList" item="item" index="index">
+                    <if test="item.status !=null and item.status != -1">
+                        when id=#{item.pid} then #{item.status}
+                    </if>
+                    <if test="item.status == null or item.status == -1">
+                        when id=#{item.pid} then items.status//原数据
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="productList" index="index" item="item" separator="," open="(" close=")">
+            #{item.pid,jdbcType=BIGINT}
+        </foreach>
+    </update>
+
+</mapper>

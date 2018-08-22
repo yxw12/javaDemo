@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace：命名空间，用于隔离sql，还有一个很重要的作用，后面会讲 -->
+<mapper namespace="com.yxw.dao.StudentDao">
+
+    <resultMap id="student" type="student">
+        <id property="sid" column="s_id"/>
+        <result property="sno" column="s_no"/>
+        <result property="sname" column="s_name"/>
+        <result property="ssex" column="s_sex"/>
+        <result property="stell" column="s_tell"/>
+        <association property="classInfo" javaType="classInfo" >
+            <id property="cid" column="c_id"/>
+            <result property="cname" column="c_name"/>
+        </association>
+    </resultMap>
+    <select id="findStudents" resultMap="student">
+        SELECT *
+        FROM t_stu s
+        LEFT JOIN t_class c
+        ON s.s_no=c.c_id
+    </select>
+</mapper>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        //定义xmlhttprequest
+        var xmlHttp;
+        function getUser(obj) {
+            //创建XMLHttprequset
+            if(window.XMLHttpRequest){
+                xmlHttp=new XMLHttpRequest();
+            }else{
+                //只包含IE7以下到浏览器
+                xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            //打开连接
+            var url="/ajax/validServlet?username="+obj.value;
+            xmlHttp.open('get',url,true);
+            //回调函数
+            xmlHttp.onreadystatechange=fallback;
+            //发送请求
+            xmlHttp.send();
+        }
+
+
+        //定义xmlhttprequest
+        var xmlHttp;
+        function postUser(obj) {
+            //创建XMLHttprequset
+            if(window.XMLHttpRequest){
+                xmlHttp=new XMLHttpRequest();
+            }else{
+                //只包含IE7以下到浏览器
+                xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            //回调函数
+            xmlHttp.onreadystatechange=fallback;
+            //打开连接
+            var url="/ajax/validServlet";
+            xmlHttp.open('post',url,true);
+            //声明数据头
+            xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            //发送请求
+            var data="username="+obj.value;
+            xmlHttp.send(data);
+        }
+        function fallback() {
+            if (xmlHttp.readyState==4 && xmlHttp.status==200) {
+                //服务器响应回来的文本
+                var text=xmlHttp.responseText;
+                if(text=="error" ){
+                    document.getElementById("Myspan").innerText="对不起用户名已经存在";
+                }else {
+                    document.getElementById("Myspan").innerText="√";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+            <form method="post">
+                用户名:<input type="text" name="username" id="username" onblur="postUser(this);">
+                <span id="Myspan"></span>
+            </form>
+</body>
+</html>
